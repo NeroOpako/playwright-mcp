@@ -30,6 +30,7 @@ import pdf from './tools/pdf';
 import snapshot from './tools/snapshot';
 import tabs from './tools/tabs';
 import screen from './tools/screen';
+import lighthouseAudit from './tools/lighthouse';
 
 import type { Tool, ToolCapability } from './tools/tool';
 import type { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -46,6 +47,7 @@ const snapshotTools: Tool[] = [
   ...pdf,
   ...snapshot,
   ...tabs(true),
+  ...lighthouseAudit(true),
 ];
 
 const screenshotTools: Tool[] = [
@@ -59,6 +61,7 @@ const screenshotTools: Tool[] = [
   ...pdf,
   ...screen,
   ...tabs(false),
+  ...lighthouseAudit(false),
 ];
 
 type Options = {
@@ -67,6 +70,7 @@ type Options = {
   headless?: boolean;
   executablePath?: string;
   cdpEndpoint?: string;
+  remoteDebuggingPort?: number;
   vision?: boolean;
   capabilities?: ToolCapability[];
 };
@@ -106,6 +110,7 @@ export async function createServer(options?: Options): Promise<Server> {
   const launchOptions: LaunchOptions = {
     headless: !!(options?.headless ?? (os.platform() === 'linux' && !process.env.DISPLAY)),
     channel,
+    args: options?.remoteDebuggingPort ? [`--remote-debugging-port=${options.remoteDebuggingPort}`] : [],
     executablePath: options?.executablePath,
   };
 

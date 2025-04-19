@@ -29,6 +29,7 @@ export type ContextOptions = {
   launchOptions?: playwright.LaunchOptions;
   cdpEndpoint?: string;
   remoteEndpoint?: string;
+  remoteDebuggingPort?: number;
 };
 
 type PageOrFrameLocator = playwright.Page | playwright.FrameLocator;

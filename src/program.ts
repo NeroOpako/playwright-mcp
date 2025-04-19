@@ -35,6 +35,7 @@ program
     .option('--browser <browser>', 'Browser or chrome channel to use, possible values: chrome, firefox, webkit, msedge.')
     .option('--caps <caps>', 'Comma-separated list of capabilities to enable, possible values: tabs, pdf, history, wait, files, install. Default is all.')
     .option('--cdp-endpoint <endpoint>', 'CDP endpoint to connect to.')
+    .option('--remote-debugging-port <rdbport>', 'Port for remote debugging.')
     .option('--executable-path <path>', 'Path to the browser executable.')
     .option('--headless', 'Run browser in headless mode, headed by default')
     .option('--port <port>', 'Port to listen on for SSE transport.')
@@ -48,6 +49,7 @@ program
         executablePath: options.executablePath,
         vision: !!options.vision,
         cdpEndpoint: options.cdpEndpoint,
+        remoteDebuggingPort: options.remoteDebuggingPort,
         capabilities: options.caps?.split(',').map((c: string) => c.trim() as ToolCapability),
       }));
       setupExitWatchdog(serverList);

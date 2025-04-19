@@ -23,7 +23,9 @@
     "ftest": "playwright test --project=firefox",
     "wtest": "playwright test --project=webkit",
     "clean": "rm -rf lib",
-    "npm-publish": "npm run clean && npm run build && npm run test && npm publish"
+    "npm-publish": "npm run clean && npm run build && npm run test && npm publish",
+    "postinstall": "playwright install --with-deps",
+    "debug": "node cli.js --port 8932 --remote-debugging-port 9222"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -36,6 +38,7 @@
     "@modelcontextprotocol/sdk": "^1.6.1",
     "commander": "^13.1.0",
     "playwright": "^1.52.0-alpha-1743163434000",
+    "playwright-lighthouse": "^4.0.0",
     "yaml": "^2.7.1",
     "zod-to-json-schema": "^3.24.4"
   },
